@@ -17,9 +17,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
+from . import Sign_Up
+
+auth = [
+    path("accounts/SignIn/", auth_views.LoginView.as_view()),
+    path("accounts/logout/", auth_views.LogoutView.as_view()),
+    path("accounts/SignUp/", Sign_Up.signup),
+]
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", views.index, name = "index")
-]
+    path("", views.index, name = "index"),
+    path("SignUp/", views.SignUp, name = "index"),
+    path("SignIn/", views.SignIn, name = "index"),
+    path("SignUp/myprofile/", views.profile, name = "index")
+] + auth

@@ -16,12 +16,14 @@ def SignIn(request: HttpRequest):
 def profile(request: HttpRequest):
     if request.POST:
         email = request.POST.get('email')
+        names = request.POST.get('names')
         gender = request.POST.get('gender')
 
         return render(request, "profile.html", {
-            "id": random.randint(1, 100),
+            "id": randint(1, 100),
             "email": email,
             "gender": gender,
+            "names": names,
         })
     else:
         return 404

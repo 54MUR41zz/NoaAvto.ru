@@ -1,5 +1,5 @@
 from django import forms
-
+from .models import User
 
 class TestForm(forms.Form):
     text_field = forms.CharField(
@@ -24,6 +24,22 @@ class TestForm(forms.Form):
         required=True
     )
 
+class CarForm(forms.Form):
+    mark = forms.CharField(
+        max_length=2020,
+        min_length=5,
+        required=True
+    )
+    release_date = forms.CharField(
+        max_length=2020,
+        min_length=5,
+        required=True
+    )
+    count_pages = forms.IntegerField(
+        min_value=1,
+    )
+
+    author = forms.ModelChoiceField(queryset=User.objects.all())
 
 class SignUpForm(forms.Form):
     email = forms.EmailField()
